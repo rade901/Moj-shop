@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'Home' => 'Početna',
+    'About' => 'O nama',
+    'Contact' => 'Kontakt',
+    'Login' => 'Prijava',
+    'Logout' => 'Odjava',
+    'pending' => 'čekanje',
+    'completed' => 'završeno',
+    'shipping' => 'dostava',
+    'sent' => 'poslano',
+    'Save' => 'Spremi',
+    'Customer name' => 'Ime kupca',
+    'Customer Lastname' => 'Prezime kupca',
+    'Email' => 'Email',
+    'Phone' => 'Telefon',
+    'Address' => 'Adresa',
+    'Status' => 'Status',
+    'Post Code' => 'Poštanski broj',
+    'Payment Method' => 'Način plaćanja',
+    'Total Price' => 'Ukupna cijena',
+    'Created At' => 'Kreirano',
+    'Updated At' => 'Ažurirano',
+    'posts' => 'Objave',
+];
