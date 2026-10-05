@@ -117,7 +117,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             <a href="<?= Url::to(['site/product-view', 'id' => $product->id]) ?>"
                                 class="d-block overflow-hidden position-relative ratio ratio-4x3 card-img-hover">
                                 <img src="<?= Html::encode($imagePath) ?>" class="card-img-top object-fit-cover"
-                                    alt="<?= Html::encode($product->name) ?>">
+                                    alt="<?= Html::encode(ucfirst($product->name)) ?>"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
 
                                 <!-- Sivi overlay i tekst preko CIJELE slike ako je rasprodano -->
                                 <?php if (isset($product->stock) && $product->stock <= 0): ?>
@@ -137,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <h3 class="h6 fw-bold mb-2 text-body line-clamp-1">
                                         <a href="<?= Url::to(['site/product-view', 'id' => $product->id]) ?>"
                                             class="text-decoration-none text-body-hover">
-                                            <?= Html::encode($product->name) ?>
+                                            <?= Html::encode(ucfirst($product->name)) ?>
                                         </a>
                                     </h3>
 
