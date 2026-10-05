@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'description:ntext',
+            'description:html',
             [
                 'attribute' => 'price',
                 'value' => function ($model) {
@@ -44,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'is_active',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return $model->is_active 
-                        ? '<span class="badge bg-success">Aktivan</span>' 
+                    return $model->is_active
+                        ? '<span class="badge bg-success">Aktivan</span>'
                         : '<span class="badge bg-danger">Neaktivan</span>';
                 },
             ],
