@@ -21,82 +21,82 @@ $this->render('_head');
 
     <!-- KONAČNI CSS STILOVI ZA LOADER I PREMIUM GUMB -->
     <style>
-        .fullscreen-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(15, 23, 42, 0.85);
-            /* Tamna moderna pozadina */
-            z-index: 9999;
-            /* Iznad svih elemenata na stranici */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            /* Efekt zamućenja pozadine */
+    .fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(15, 23, 42, 0.85);
+        /* Tamna moderna pozadina */
+        z-index: 9999;
+        /* Iznad svih elemenata na stranici */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+        /* Efekt zamućenja pozadine */
 
-            /* Glatka CSS animacija pojavljivanja (Fade-in) */
-            animation: globalLoaderFadeIn 0.3s ease-out forwards;
+        /* Glatka CSS animacija pojavljivanja (Fade-in) */
+        animation: globalLoaderFadeIn 0.3s ease-out forwards;
+    }
+
+    .loader-content {
+        color: #fff;
+    }
+
+    /* Ključni kadrovi za fade-in animaciju cjelokupnog loadera */
+    @keyframes globalLoaderFadeIn {
+        from {
+            opacity: 0;
         }
 
-        .loader-content {
-            color: #fff;
+        to {
+            opacity: 1;
         }
+    }
 
-        /* Ključni kadrovi za fade-in animaciju cjelokupnog loadera */
-        @keyframes globalLoaderFadeIn {
-            from {
-                opacity: 0;
-            }
+    /* MODERNIZIRANI FIKSIRANI GUMB ZA TESTIRANJE */
+    .test-loader-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 9990;
+        background: rgba(30, 41, 59, 0.75);
+        /* Poluprozirna tamna podloga */
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 12px 22px;
+        border-radius: 50px;
+        /* Oblik pilule */
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(10px);
+        /* Efekt zamućenog stakla */
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-            to {
-                opacity: 1;
-            }
-        }
+    /* Efekt prelaska mišem (Hover) */
+    .test-loader-btn:hover {
+        background: rgba(30, 41, 59, 0.95);
+        color: #fbbf24;
+        /* Tekst i ikona postaju zlatno-žuti */
+        border-color: rgba(251, 191, 36, 0.4);
+        transform: translateY(-3px) scale(1.02);
+        /* Blago podizanje i povećanje */
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    }
 
-        /* MODERNIZIRANI FIKSIRANI GUMB ZA TESTIRANJE */
-        .test-loader-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 9990;
-            background: rgba(30, 41, 59, 0.75);
-            /* Poluprozirna tamna podloga */
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 12px 22px;
-            border-radius: 50px;
-            /* Oblik pilule */
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(10px);
-            /* Efekt zamućenog stakla */
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Efekt prelaska mišem (Hover) */
-        .test-loader-btn:hover {
-            background: rgba(30, 41, 59, 0.95);
-            color: #fbbf24;
-            /* Tekst i ikona postaju zlatno-žuti */
-            border-color: rgba(251, 191, 36, 0.4);
-            transform: translateY(-3px) scale(1.02);
-            /* Blago podizanje i povećanje */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Efekt pritiska gumba (Active) */
-        .test-loader-btn:active {
-            transform: translateY(-1px) scale(0.98);
-        }
+    /* Efekt pritiska gumba (Active) */
+    .test-loader-btn:active {
+        transform: translateY(-1px) scale(0.98);
+    }
     </style>
 </head>
 
@@ -108,7 +108,7 @@ $this->render('_head');
     <main id="main" class="flex-grow-1" role="main">
         <div class="container">
             <?php if (!empty($this->params['breadcrumbs'])): ?>
-                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
             <?php endif ?>
             <?= Alert::widget() ?>
             <?= $content ?>
@@ -116,13 +116,6 @@ $this->render('_head');
     </main>
 
     <?= $this->render('_footer') ?>
-
-    <!-- MODERNI FIKSIRANI TESTNI GUMB (Provjereni HTML prijenos rada) -->
-    <button
-        onclick="var l = document.getElementById('global-html-loader'); var t = document.getElementById('global-loader-text'); if(l && t) { t.innerText = 'Sustav radi besprijekorno! 🚀'; l.style.display = 'flex'; setTimeout(function(){ l.style.display = 'none'; }, 3000); } else { alert('Greška: HTML elementi loadera nisu pronađeni na stranici!'); }"
-        class="test-loader-btn">
-        <span>⚡</span> Testiraj sučelje
-    </button>
 
     <!-- GLOBALNI SPINNER -->
     <div id="global-html-loader" class="fullscreen-loader" style="display: none;">
