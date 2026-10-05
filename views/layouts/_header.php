@@ -38,6 +38,10 @@ if (!Yii::$app->user->isGuest) {
             'url' => ['/post/index'],
         ],
         [
+            'label' => 'Kategorije',
+            'url' => ['/category/index'],
+        ],
+        [
             'label' => 'Narudžbe',
             'url' => ['/order-table/index'],
         ],
@@ -108,7 +112,7 @@ if (!Yii::$app->user->isGuest) {
             'class' => 'btn btn-link nav-link fs-5',
             'aria-label' => 'Switch to dark mode',
         ],
-    ) 
+    )
     ?>
     <?php NavBar::end() ?>
 </header>

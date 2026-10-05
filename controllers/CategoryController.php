@@ -2,17 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Post;
-use app\models\PostSearch;
+use app\models\Category;
+use app\models\CategorySearch;
 use app\controllers\AdminController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class PostController extends AdminController
+class CategoryController extends AdminController
 {
     /**
      * @inheritDoc
@@ -33,13 +33,13 @@ class PostController extends AdminController
     }
 
     /**
-     * Lists all Post models.
+     * Lists all Category models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PostSearch();
+        $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +49,7 @@ class PostController extends AdminController
     }
 
     /**
-     * Displays a single Post model.
+     * Displays a single Category model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,13 +62,13 @@ class PostController extends AdminController
     }
 
     /**
-     * Creates a new Post model.
+     * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Post();
+        $model = new Category();
         $model->created_at = date('Y-m-d H:i:s');
         $model->updated_at = date('Y-m-d H:i:s');
 
@@ -86,7 +86,7 @@ class PostController extends AdminController
     }
 
     /**
-     * Updates an existing Post model.
+     * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -107,7 +107,7 @@ class PostController extends AdminController
     }
 
     /**
-     * Deletes an existing Post model.
+     * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -121,15 +121,15 @@ class PostController extends AdminController
     }
 
     /**
-     * Finds the Post model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Post the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Post::findOne(['id' => $id])) !== null) {
+        if (($model = Category::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

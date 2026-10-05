@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\base\Security;
 use yii\mail\MailerInterface;
-use yii\web\Controller;
+use app\models\Category;
 use yii\web\ErrorAction;
 use yii\web\Response;
 
@@ -80,11 +80,18 @@ class SiteController extends AdminController
      */
     public function actionIndex(): string
     {
-        // Pronalazi samo poslednji uneti post (sortirano opadajuće po ID-u ili datumu)
-        $post = Post::find()->orderBy(['id' => SORT_DESC])->one();
-        $products = Product::find()->orderBy(['id' => SORT_DESC])->limit(3)->all(); // Prikazuje poslednjih 3 proizvoda
+        // 1. Prvo tražimo kategoriju (Ova linija je sigurna)
+        $category = Category::find()->where(['name' => 'naslov'])->one();
 
-        // Ako u bazi uopšte nema postova, sprečavamo grešku
+        // Inicijaliziramo varijablu na null kako ne bi bila prazna
+        $post = null;
+
+        // 2. KLJUČNA PROVJERA: Tek ako kategorija STVARNO postoji, tražimo njezin ID i post
+        if ($category !== null) {
+            $post = Post::find()->where(['category_id' => $category->id])->orderBy(['id' => SORT_DESC])->one();
+        }
+
+        // 3. Ako kategorija ne postoji ILI ako u njoj nema postova, stvaramo zamjenski objekt
         if ($post === null) {
             $post = new Post([
                 'title' => 'Dobrodošli',
@@ -92,8 +99,11 @@ class SiteController extends AdminController
             ]);
         }
 
+        // 4. Dohvaćamo posljednja 3 proizvoda potpuno neovisno
+        $products = Product::find()->orderBy(['id' => SORT_DESC])->limit(3)->all();
+
         if (empty($products)) {
-            $products = "<p>Trenutno nema objavljenih proizvoda.</p>";
+            $products = []; // Bolje je proslijediti prazan niz nego HTML string kako se View ne bi srušio
         }
 
         return $this->render('index', [

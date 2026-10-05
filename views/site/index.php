@@ -18,9 +18,9 @@ $this->params['meta_keywords'] = 'yii, yii2, php, framework, web application, hi
             'class' => 'd-none d-lg-block position-absolute hero-logo',
         ]) ?>
         <div class="position-relative">
-            <h1 class="display-5 fw-bold mb-3"><?= Html::encode($model->title) ?></h1>
+            <h1 class="display-5 fw-bold mb-3"><?= Html::encode($model->title ?? '') ?></h1>
             <p class="lead opacity-75 mb-4 hero-lead">
-                <?= Html::encode($model->content) ?>
+                <?= Html::encode($model->content ?? '') ?>
             </p>
             <div class="d-flex gap-2 flex-wrap">
                 <?= Html::a(
@@ -45,41 +45,38 @@ $this->params['meta_keywords'] = 'yii, yii2, php, framework, web application, hi
         </div>
     </div>
 
-<!-- Extensions grid -->
-<div class="row g-3">
-    <?php foreach ($products as $product): ?>
+    <!-- Extensions grid -->
+    <div class="row g-3">
+        <?php $products = $products ?? []; ?>
+        <?php foreach ($products as $product): ?>
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 border-0 shadow-sm rounded-3 extension-card overflow-hidden">
-                
+
                 <!-- DOHVAĆANJE SLIKE IZ POVEZANE TABLICE -->
-                <?php 
-                $mainImage = null;
-                if (!empty($product->images)) {
-                    foreach ($product->images as $img) {
-                        if ($img->is_main == 1) {
-                            $mainImage = $img;
-                            break;
+                <?php
+                    $mainImage = null;
+                    if (!empty($product->images)) {
+                        foreach ($product->images as $img) {
+                            if ($img->is_main == 1) {
+                                $mainImage = $img;
+                                break;
+                            }
+                        }
+                        if ($mainImage === null && isset($product->images[0])) {
+                            $mainImage = $product->images[0];
                         }
                     }
-                    if ($mainImage === null && isset($product->images[0])) {
-                        $mainImage = $product->images[0];
-                    }
-                }
-                ?>
+                    ?>
 
                 <!-- Klik na sliku također vodi na pregled proizvoda -->
                 <a href="<?= Url::to(['site/product-view', 'id' => $product->id]) ?>">
                     <?php if ($mainImage !== null): ?>
-                        <img src="<?= Yii::getAlias('@web/') . Html::encode($mainImage->path) ?>" 
-                             class="card-img-top" 
-                             alt="<?= Html::encode($product->name) ?>"
-                             style="height: 200px; object-fit: cover;">
+                    <img src="<?= Yii::getAlias('@web/') . Html::encode($mainImage->path) ?>" class="card-img-top"
+                        alt="<?= Html::encode($product->name) ?>" style="height: 200px; object-fit: cover;">
                     <?php else: ?>
-                        <!-- Zamjenska slika ako proizvod nema niti jednu sliku -->
-                        <img src="<?= Yii::getAlias('@web/images/no-image.jpg') ?>" 
-                             class="card-img-top" 
-                             alt="No image available"
-                             style="height: 200px; object-fit: cover;">
+                    <!-- Zamjenska slika ako proizvod nema niti jednu sliku -->
+                    <img src="<?= Yii::getAlias('@web/images/no-image.jpg') ?>" class="card-img-top"
+                        alt="No image available" style="height: 200px; object-fit: cover;">
                     <?php endif; ?>
                 </a>
 
@@ -92,18 +89,18 @@ $this->params['meta_keywords'] = 'yii, yii2, php, framework, web application, hi
                         <?= yii\helpers\HtmlPurifier::process($product->description) ?>
                     </div>
                 </div>
-                
+
                 <div class="card-footer bg-transparent border-0 pt-0">
                     <!-- PROMIJENJENO: Dinamička poveznica koja vodi na ProductController actionView -->
                     <?= Html::a(
-                        'Pogledaj proizvod &raquo;',
-                        ['site/product-view', 'id' => $product->id],
-                        [
-                            'class' => 'btn btn-sm btn-outline-primary w-100 mb-2', // Malo uočljiviji gumb preko cijele širine
-                        ],
-                    ) ?>
+                            'Pogledaj proizvod &raquo;',
+                            ['site/product-view', 'id' => $product->id],
+                            [
+                                'class' => 'btn btn-sm btn-outline-primary w-100 mb-2', // Malo uočljiviji gumb preko cijele širine
+                            ],
+                        ) ?>
                 </div>
             </div>
         </div>
-    <?php endforeach; ?>
-</div>
+        <?php endforeach; ?>
+    </div>

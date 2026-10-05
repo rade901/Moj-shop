@@ -23,4 +23,10 @@ return [
     'Created At' => 'Kreirano',
     'Updated At' => 'Ažurirano',
     'posts' => 'Objave',
+    'categories' => 'Kategorije',
+    'Parent ID' => 'Roditeljska kategorija',
+    'Name' => 'Naziv',
+    'Description' => 'Opis',
+    'Categories' => 'Kategorije',
+    'Create Category' => 'Kreiraj kategoriju',
 ];
