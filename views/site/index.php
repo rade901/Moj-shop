@@ -59,7 +59,7 @@ $bannerStyle = $backgroundImageUrl
                 <?php if (!empty($model)): ?>
                     <?= Html::a(
                         'Pročitaj članak &raquo;',
-                        ['post/view', 'id' => $model->id],
+                        ['site/post-view', 'id' => $model->id],
                         ['class' => 'btn btn-light btn-lg fw-semibold px-4 shadow-sm']
                     ) ?>
                 <?php endif; ?>

@@ -70,6 +70,10 @@ if (!Yii::$app->user->isGuest) {
             'url' => ['/site/all-products'],
         ],
         [
+            'label' => 'Objave',
+            'url' => ['/site/all-posts'],
+        ],
+        [
             'label' => 'O nama',
             'url' => ['/site/about'],
         ],
@@ -94,7 +98,10 @@ if (!Yii::$app->user->isGuest) {
     <?php NavBar::begin(
         [
             'brandLabel' => Yii::$app->name,
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandLabel' => Html::img(Yii::$app->request->baseUrl . '/images/lazo.png', [
+                'alt' => Yii::$app->name,
+                'style' => 'height: 40px; display: inline-block; vertical-align: middle;'
+            ]),
             'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
         ],
     ) ?>

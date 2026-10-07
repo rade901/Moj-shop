@@ -233,4 +233,33 @@ class SiteController extends AdminController
 
         return $this->render('all_products', ['products' => $products]);
     }
+
+    public function actionAllPosts(): string
+    {
+        // Kreiramo DataProvider koji automatski rukuje upitima i straničenjem (paginacijom)
+        $dataProvider = new \yii\data\ActiveDataProvider([
+            'query' => Post::find()->orderBy(['created_at' => SORT_DESC]),
+            'pagination' => [
+                'pageSize' => 9, // Broj kartica članaka koji se prikazuje po jednoj stranici
+            ],
+        ]);
+
+        // PROMIJENJENO: Prosljeđujemo $dataProvider izravno u all_posts pogled
+        return $this->render('all_posts', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+
+    public function actionPostView(int $id): string
+    {
+        $post = Post::findOne($id);
+
+        if (!$post) {
+            throw new \yii\web\NotFoundHttpException('Post nije pronađen.');
+        }
+
+        return $this->render('post_view', ['model' => $post]);
+    }
 }
