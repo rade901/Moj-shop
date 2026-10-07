@@ -15,10 +15,12 @@ use Yii;
  * @property int|null $category_id
  *
  * @property Category $category
+ * @property PostImage[] $images
  */
 class Post extends \yii\db\ActiveRecord
 {
-
+    // Virtualno polje za prihvaćanje više datoteka iz forme
+    public $imageFiles;
 
     /**
      * {@inheritdoc}
@@ -35,14 +37,17 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['category_id'], 'default', 'value' => null],
-            [['title', 'content', 'created_at', 'updated_at'], 'required'],
+            // POPRAVLJENO: Izbačeni 'created_at' i 'updated_at' iz 'required'
+            [['title', 'content'], 'required'],
             [['content'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at'], 'safe'], // Ovdje ostaju, što je u redu
             [['category_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['imageFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 10],
         ];
     }
+
 
     /**
      * {@inheritdoc}
@@ -51,11 +56,12 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'content' => Yii::t('app', 'Content'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'title' => Yii::t('app', 'Naslov'),
+            'content' => Yii::t('app', 'Sadržaj'),
+            'created_at' => Yii::t('app', 'Kreirano'),
+            'updated_at' => Yii::t('app', 'Ažurirano'),
+            'category_id' => Yii::t('app', 'Kategorija'),
+            'imageFiles' => Yii::t('app', 'Slike članka'),
         ];
     }
 
@@ -69,4 +75,14 @@ class Post extends \yii\db\ActiveRecord
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
+    /**
+     * PROMIJENJENO: Naziv relacije preimenovan iz getPostImages u getImages
+     * Sada se savršeno podudara s pozivom $model->images u formi i kontroleru.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(PostImage::class, ['post_id' => 'id'])->orderBy(['sort_order' => SORT_ASC]);
+    }
 }
