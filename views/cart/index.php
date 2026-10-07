@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
@@ -19,13 +20,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (empty($products)): ?>
             <div class="text-center py-5 bg-body-tertiary rounded-4 border border-secondary border-opacity-10">
                 <p class="fs-4 text-secondary mb-3">🛒 Vaša košarica je prazna.</p>
-                <?= Html::a('Natrag na trgovinu', ['product/index'], ['class' => 'btn btn-primary px-4']) ?>
+                <?= Html::a('Natrag na trgovinu', ['site/all-products'], ['class' => 'btn btn-primary px-4']) ?>
             </div>
         <?php else: ?>
             <div class="row g-4">
                 <!-- Tablica proizvoda u košarici -->
                 <div class="col-lg-8">
-                    <div class="table-responsive bg-body-tertiary p-4 rounded-4 border border-secondary border-opacity-10 shadow-sm">
+                    <div
+                        class="table-responsive bg-body-tertiary p-4 rounded-4 border border-secondary border-opacity-10 shadow-sm">
                         <table class="table align-middle text-body mb-0">
                             <thead>
                                 <tr class="text-secondary border-bottom border-secondary border-opacity-25">
@@ -55,23 +57,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        
-                        <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top border-secondary border-opacity-25">
+
+                        <div
+                            class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top border-secondary border-opacity-25">
                             <span class="fs-4 fw-bold text-body">Ukupno za uplatu:</span>
-                            <span class="fs-3 fw-extrabold text-primary"><?= number_format($totalPrice, 2, ',', '.') ?> EUR</span>
+                            <span class="fs-3 fw-extrabold text-primary"><?= number_format($totalPrice, 2, ',', '.') ?>
+                                EUR</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- FORMA ZA PODATKE I PLAĆANJE POUZEĆEM -->
                 <div class="col-lg-4">
-                    <div class="bg-body-tertiary p-4 rounded-4 border border-secondary border-opacity-10 shadow-sm position-sticky" style="top: 2rem;">
+                    <div class="bg-body-tertiary p-4 rounded-4 border border-secondary border-opacity-10 shadow-sm position-sticky"
+                        style="top: 2rem;">
                         <h3 class="h5 fw-bold text-body mb-3">Podaci za dostavu</h3>
-                        
+
                         <!-- Informativni box za pouzeće -->
-                        <div class="alert alert-info border-0 rounded-3 mb-4 text-start small bg-info bg-opacity-10 text-info">
+                        <div
+                            class="alert alert-info border-0 rounded-3 mb-4 text-start small bg-info bg-opacity-10 text-info">
                             <strong>ℹ Način plaćanja: Plaćanje pouzećem</strong><br>
-                            Narudžbu ćete platiti gotovinom ili karticom kuriru prilikom same dostave na Vašu adresu. nema skrivenih troškova.
+                            Narudžbu ćete platiti gotovinom ili karticom kuriru prilikom same dostave na Vašu adresu. nema
+                            skrivenih troškova.
                         </div>
 
                         <?php $form = ActiveForm::begin(); ?>
